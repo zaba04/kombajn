@@ -9,7 +9,6 @@
 struct DaneX{
     double x;
     struct DaneX *next;
-	struct DaneX *previous;
 };
 struct DaneX *WczytajDaneX (FILE *strumien);
 void WypiszDaneX (FILE *strumien, const struct DaneX *lista);

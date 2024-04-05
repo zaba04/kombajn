@@ -5,36 +5,31 @@
 
 //przerób na wczytywanie ze strumienia
 struct DaneXY *WczytajDane (FILE *stream){
-	stream = fopen("ex.txt", "r");
+	stream = fopen("ex.txt", "r");\
+	int xs = 1;
+	int ys = 1; //podstaw na wczytywane z pliku
+	
 	struct DaneXY *head = NULL;
-	struct DaneXY *tail = NULL;
-		if(head){
-			int number = 10;
-			head->x = number;
-			head->y = number;
-			head->previous = head->next = NULL;
-			tail = head;
-		}
+	*head = (struct DaneXY *)malloc(sizeof(struct DaneXY));
+	head->x = xs;
+	head->y = ys;
+	head->next = NULL;
+	
 	while(! feof (stdin)){
-		struct DaneXY *new = (struct DaneXY *)malloc(sizeof(struct DaneXY));
-		scanf("%lg %lg", &new->x, &new->y);
-		if(tail){
-			tail->next = new;
-			new->previous = tail;
-			tail = new;
-		}else{
-			head = new;
-			tail = new;
-			head->previous = NULL;
-		}
+		struct DaneXY* new = (struct DaneXY*)malloc(sizeof(struct DaneXY));
+		new->x = xs;
+		new->y = ys;
+		new->next = *head;
+		*head = new;
 	}
-	tail->next = NULL;
+	
+	
 	fclose(stream);
 	return head;
 }
 void WypiszDane (FILE *stream1, const struct DaneXY *lista){
 	stream1 = fopen("ex2.txt", "w");
-	while(! feof(stdin)){//sprawdź czy to działa na listę czy na plik
+	while(lista != NULL){//sprawdź czy to działa na listę czy na plik
 		fprintf(stream1, "%lg\t%lg\n", lista->x, lista->y);
 		lista = lista->next;
 	}
@@ -48,7 +43,7 @@ struct DaneXY *PoliczCalke (const struct DaneXY *lista){
 	struct DaneXY *lista1 = (struct DaneXY *)malloc(sizeof(struct DaneXY));
 	x1 = lista->x;
 	y1 = lista->y;
-	while(! feof(stdin)){//sprawdź czy to działa na listę czy na plik
+	while(lista != NULL){
 		lista = lista->next;
 		x2 = lista->x;
 		y2 = lista->y;
@@ -71,7 +66,7 @@ struct DaneXY *PoliczPochodna (const struct DaneXY *lista){
 	struct DaneXY *lista1 = (struct DaneXY *)malloc(sizeof(struct DaneXY));
 	x1 = lista->x;
 	y1 = lista->y;
-	while(! feof(stdin)){//sprawdź czy to działa na listę czy na plik
+	while(lista != NULL)){
 		lista = lista->next;
 		x2 = lista->x;
 		y2 = lista->y;
@@ -94,7 +89,7 @@ struct DaneXY *WygladzDane (const struct DaneXY *lista){
 	lista = lista->next;
 	x1 = lista->x;
 	y1 = lista->y;
-	while(!feof (stdin)){//sprawdź czy to działa na listę czy na plik
+	while(lista != NULL){
 		lista = lista->next;
 		x2 = lista->x;
 		y2 = lista->x;

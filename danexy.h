@@ -13,7 +13,6 @@ struct DaneXY{
     double x;
     double y;
     struct DaneXY *next;
-	struct DaneXY *previous;
 };
 struct DaneXY *WczytajDane (FILE *stream);
 void WypiszDane (FILE *stream, const struct DaneXY *lista);

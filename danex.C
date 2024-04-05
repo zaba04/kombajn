@@ -4,34 +4,25 @@
 //przerób by final był wskaźnikiem na początek listy
 struct DaneX *WczytajDaneX (FILE *strumien){
 	strumien = fopen("ex.txt", "r");
+	int xs = 2; //zmień na wczytywane z pliku
+	
 	struct DaneX *head = NULL;
-	struct DaneX *tail = NULL;
-		if(head){
-			int number = 10;
-			head->x = number;
-			head->previous = head->next = NULL;
-			tail = head;
-		}
+	*head = (struct DaneX*)malloc(sizeof(struct DaneX));
+	head->x = xs;
+	head->next = NULL;
+	
 	while(! feof (stdin)){
-		struct DaneX *new = (struct DaneX *)malloc(sizeof(struct DaneX));
-		scanf("%lg", &new->x);
-		if(tail){
-			tail->next = new;
-			new->previous = tail;
-			tail = new;
-		}else{
-			head = new;
-			tail = new;
-			head->previous = NULL;
-		}
+		struct DaneX* new = (struct DaneX*)malloc(sizeof(struct DaneX));
+		new->x = xs;
+		new->next = *head;
+		*head = new;
 	}
-	tail->next = NULL;
-	return head;//mamy stworzony pierwszy element listy
+	return head;
 	fclose(strumien);
 }
 void WypiszDaneX (FILE *strumien1, const struct DaneX *lista){
 	strumien1 = fopen("ex3.txt", "w");
-	while(! feof (stdin)){
+	while(lista != NULL){
 		fprintf(strumien1, "%lg/n", lista->x);
 		lista = lista->next;
 	}
@@ -53,7 +44,37 @@ struct DaneX *DFT (const struct DaneX *lista){//doczytaj to lepiej bo bardzo pal
 	return list;
 }
 struct DaneXY *Sortowanie (const struct DaneX *lista){
+    int count = 0;
+    while (lista != NULL) {
+        count++;
+        lista = lista->next;
+    }
+    struct DaneX tmp1[1];
+	for(int i = 0; i < count; i++){
+		struct DaneX tmp2[i+1];
+		for(int j = 0; j < i; j++){
+			tmp2[j] = tmp1[j];
+		}
+		tmp1[i] = lista->x;
+		lista->next;
+	}
+	for(int i = 0, i < count, i++){
+		if(tmp1[i]>tmp[i+1]){
+			int tmp = tmp1[i];
+			tmp1[1] = tmp[i+1];
+			tmp1[i+1] = tmp;
+		}
+	}
+	struct DaneX *head1 = NULL;
+	*head1 = (struct DaneX*)malloc(sizeof(struct DaneX));
+	head1->x = tmp1[0];
+	head1->next = NULL;
 	
-	
-	return NULL;
+	for(int i = 0; i < count; i++){
+		struct DaneX* new = (struct DaneX*)malloc(sizeof(struct DaneX));
+		new->x = tmp[i+1];
+		new->next = *head;
+		*head = new;
+	}
+	return head;
 }
