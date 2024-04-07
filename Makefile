@@ -12,10 +12,10 @@ main.o: main.c danexy.h danex.h statystyka.h
 danexy.o: danexy.c danexy.h danex.h statystyka.h
 	$(CC) -o danexy.o -c danexy.c $(CFLAGS)
 
-danex.o: danex.c danex.h danexy.h statystyka.h
-	$(CC) -o danex.o -c danex.c $(CFLAGS)
+danex.o: danex.C danex.h danexy.h statystyka.h
+	$(CC) -o danex.o -c danex.C $(CFLAGS)
 	
-statystyka.o: statystyka.c statystyka.h danex.h danexy.h
+	statystyka.o: statystyka.c statystyka.h danex.h danexy.h
 	$(CC) -o statystyka.o -c statystyka.c $(CFLAGS)
 
 clean:
