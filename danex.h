@@ -13,6 +13,6 @@ struct DaneX{
 struct DaneX *WczytajDaneX (FILE *strumien);
 void WypiszDaneX (FILE *strumien, const struct DaneX *lista);
 struct DaneX *DFT (const struct DaneX *lista);
-struct DaneXY *Sortowanie (const struct DaneX *lista);
+struct DaneX *Sortowanie (const struct DaneX *lista);
 
 #endif
